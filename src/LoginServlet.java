@@ -62,8 +62,11 @@ public class LoginServlet extends HttpServlet {
 			  Console.println("LoginServlet enters the try block.\n");	
 			  Console.println(accountName.toString());
 			  CustomerAccount account = CustomerAccount.authenticateCredentials(accountName,password);	//Authenticate customer's credentials
-			  Console.println("LoginServlet returned from authentication call to customer account.\n");			  
+			  Console.println("LoginServlet returned from authentication call to customer account with " + account.getAccountName()
+			  					+ "\n");	
+			  		
 			  loginSession = ServletHelper.createSession(request, account); 								//Login the customer
+			  Console.println("ServletHelper.createSession returned loginSession value of : "+ loginSession +   ".\n");	
 			  ServletHelper.sendResponse(request, response, "Logged-in as "+accountName, "Ok", "index.html");
 		} catch(Exception e) {
 			  Console.println("Login request has failed, "+e.getMessage());

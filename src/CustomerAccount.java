@@ -137,8 +137,9 @@ public class CustomerAccount {
 						"The size of the accountList arrayList is: " +  accountList.size()+"\n");
 		for ( int i = 0; i < accountList.size(); i++ ){
 		CustomerAccount x = accountList.get(i);
-		Console.println("I am in the for loop, here is the toString of account x" + x.toString());
-			if(accountName == x.accountName) {
+		Console.println("I am in the for loop, here is the toString of the accountName attribute of object account x: " + x.accountName.toString());
+		
+			if(accountName.equals(x.accountName)) {
 				accountNameToGet = x;
 				
 			}
