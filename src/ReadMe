@@ -1,0 +1,20 @@
+Suds4You --- Student resources
+
+Misc Helper Files
+	AccountException.java:	An Exception thrown for problems with CustomerAccount
+	Console.java:  Console debugging messages
+	
+Servlets (Should not require student modifications)
+	CreateNewAccountServlet.java:  Creates new Customer Account and a session
+	DeleteAccountServlet.java:  Deletes a Customer Account
+	ExampleFormDataServlet.java:  Example of how a servlet processes HTML form data
+	ExampleHelloWorldServlet.java:  Simple example of a servlet
+	LoginServlet.java:  Log-in an existing Customer Account, creating a session
+	LogoutServlet.java:  Log-out the current session
+	ServletHelper.java:  Helper methods for servlet implementations
+	
+Business Policy/Logic (To be completed by students)
+	CustomerAccount.java:  Implements policies for creating, authenticating, etc, customer accounts
+	
+This is an eclipse (oxygen) project
+
