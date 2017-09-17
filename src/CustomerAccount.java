@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * Implements business logic/policies for the creation, authentication and deletion of customer accounts
@@ -84,7 +85,39 @@ public class CustomerAccount {
 	 */
 	public static CustomerAccount createNewAccount(String accountName, String password1, String password2) throws AccountException {
 	
-		//TODO:  Implement business policies defined in Product Backlog for new accounts
+        // A nice email regex I found online //tp
+        String emailPattern = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)"+
+                              "*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]"+
+                              "|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]"+
+                              "*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4]"+
+                              "[0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|"+
+                              "[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]"+
+                              "|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        
+        // Let's see if the email entered is an actual email //tp
+        boolean validEmail = Pattern.matches(emailPattern, accountName);
+        if(!validEmail)
+            throw new AccountException("Please enter a valid email address.");
+        
+        // A nice password regex I found online: //tp
+        //     1 lowercase alpha, 
+        //     1 uppercase alpha,
+        //     1 numeric,
+        //     1 special char,
+        //     at least 8 characters long
+        String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\\$%\\^&\\*]).{8,}$";
+        
+        // Let's see if the password that was entered is a valid one //tp
+        boolean validPassword = Pattern.matches(passwordPattern, password1);
+        if(!validPassword) {
+        		throw new AccountException("Please enter a valid password at least 8 characters long with 1 uppercase letter, "
+        								  +"1 lowercase letter, 1 number, and 1 special character.");
+        }
+        
+        // Make sure the passwords that were entered match. //tp
+        if (!password1.equals(password2))
+            throw new AccountException("Passwords did not match.");
+
 		//first attempt just add the name and password
 		String newAccountName = accountName; //mc
 		String newPassword = password1;      //mc
@@ -135,24 +168,41 @@ public class CustomerAccount {
 		CustomerAccount accountNameToGet = null;
 		Console.println("I am about to enter the for loop in the authenticateCredentials method of CustomerAccount.\n" +
 						"The size of the accountList arrayList is: " +  accountList.size()+"\n");
-		for ( int i = 0; i < accountList.size(); i++ ){
-		CustomerAccount x = accountList.get(i);
-		Console.println("I am in the for loop, here is the toString of the accountName attribute of object account x: " + x.accountName.toString());
 		
-			if(accountName.equals(x.accountName)) {
-				accountNameToGet = x;
+		// Let's try a foreach loop to make sure we have an account on file with these credentials
+		for(CustomerAccount account: accountList) {
+			if(account.accountName.equals(accountName)) {
 				
+				// Check if locked
+				if(account.isLocked)
+					throw new AccountException("Account is locked for too many incorrect login attempts. Check back again later.");
+				
+				// Found the username, now let's check if the password is correct
+				if(account.password.equals(password)) {
+					// Password matches. Assign the account and break out of loop
+					accountNameToGet = account;
+					break;
+				}
+				else {
+					// Incorrect password, handle the failed attempt
+					if(account.nSequentialFailedAuthenticationAttempts > 3) {
+						// Lock the account
+						account.isLocked = true;
+						throw new AccountException("Account password has been incorrect for more that 3 consecutive times... account is now locked.");
+					}
+					else {
+						// Increment the failed login attempts
+						account.nSequentialFailedAuthenticationAttempts++;
+						throw new AccountException("Incorrect password... please try again.");
+					}
+				}
 			}
-		
 		}
-		//TODO:  Implement credential authentication
 		
-		//TODO:  Implement business policies defined in Product Backlog for locking an account after
-		//repeated unsuccessful login attempts.
+		if(accountNameToGet == null)
+			throw new AccountException("Could not find account username.");
+		
 		return accountNameToGet;
-		
-		//throw(new AccountException("authenticateCredentials not even implemented"));
-		
 		
 	} //authenticateAccount
 	

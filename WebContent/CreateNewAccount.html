@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create New User Account</title>
+<!-- This is the preliminary ugly interface for creating a new account.  The user's browser 
+displays this form, and, after clicking submit, transmits a POST message to tomcat
+which will invoke CreateNewAccountSerlet to process the user's new account information. -->
+</head>
+   <body>
+      <h1>Create New User Account</h1>
+      <form action="CreateNewAccountServlet" method="POST">
+         Account Name: <input type="text" name="account_name">
+         <br />
+         Password: <input type="password" name="password1" />
+         <br />
+         Repeat:  <input type="password" name="password2" />
+         <input type="submit" value="Submit" />
+      </form>
+   </body>
+</html>

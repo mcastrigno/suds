@@ -57,8 +57,8 @@ public class CreateNewAccountServlet extends HttpServlet {
 			  Console.println("We came back from creating the account\n");
 			  loginSession = ServletHelper.createSession(request, account);									//Login new customer
 		} catch(Exception e) {
-		      response.sendRedirect("CreateNewAccountError.html");   //Report failure
-			  ServletHelper.sendResponse(request, response,  "Create account, "+accountName+", failed:  "+e.getMessage(), "Continue", "index.html");
+			  //Report failure
+			  ServletHelper.sendResponse(request, response,  "Create account, "+accountName+", failed:  "+e.getMessage(), "Continue", "CreateNewAccount.html");
 		}	  
 		
 		//Send response to browser
