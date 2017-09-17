@@ -174,8 +174,9 @@ public class CustomerAccount {
 			if(account.accountName.equals(accountName)) {
 				
 				// Check if locked
-				if(account.isLocked)
+				if(account.isLocked) {
 					throw new AccountException("Account is locked for too many incorrect login attempts. Check back again later.");
+				}
 				
 				// Found the username, now let's check if the password is correct
 				if(account.password.equals(password)) {
@@ -185,10 +186,10 @@ public class CustomerAccount {
 				}
 				else {
 					// Incorrect password, handle the failed attempt
-					if(account.nSequentialFailedAuthenticationAttempts > 3) {
+					if(account.nSequentialFailedAuthenticationAttempts >= 2) {
 						// Lock the account
 						account.isLocked = true;
-						throw new AccountException("Account password has been incorrect for more that 3 consecutive times... account is now locked.");
+						throw new AccountException("Account password has been incorrect for 3 consecutive times... account is now locked.");
 					}
 					else {
 						// Increment the failed login attempts
