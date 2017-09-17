@@ -233,9 +233,21 @@ public class CustomerAccount {
 	 * someday delete an account without first authenticating it.
 	 */
 	public void delete() throws AccountException {
+		
+		for ( int i = 0; i < accountList.size(); i++ ){
+		CustomerAccount x = accountList.get(i);
+		Console.println("I am in the for loop, here is the toString of the accountName attribute of object account x: " + x.accountName.toString());
+		
+			if(accountName.equals(x.accountName)) {
+				accountList.remove(x);
+				
+			}
+			
+		}
+		
 		Console.println("CustomerAccount.delete()");
 		//TODO:  Remove this account from the list of all accounts
-		throw(new AccountException("delete not implemented"));
+		//throw(new AccountException("delete not implemented"));
 	} //delete
 	
 	
