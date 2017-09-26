@@ -2,21 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="style.css">
 <title>Suds4You</title>
 </head>
 <body>
-<h1>Suds4You</h1>
-      <h3>Existing Users</h3>
+<div align="center"/>
+<table>
+<tr><td colspan ="3"><div align=center><h1>Suds4You</h1></div></td></tr>
+<tr><td colspan ="3"><div align=center><a class ="buttonStyle2" href="Product.html">Buy Now</div></td></tr>
+      <tr><td colspan ="2"><h3>Existing Users</h3></td>
+	  <td rowspan = "10"> <img src=suds_rev2.jpg></td></tr>
+	  <tr><td>
       <form action="LoginServlet" method="POST">
-         Account Name: <input type="text" name="account_name">
-         <br />
-         Password: <input type="password" name="password" />
-         <br />
-         <input type="submit" value="Login" />
+         Account Name: </td><td><input type="text" name="account_name"></td></tr>
+         <tr><td>Password:</td> <td><input type="password" name="password" /></td></tr>
+  
+        <tr><td colspan = "2"> <input class ="buttonStyle2" type="submit" value="Login" /></td></tr>
       </form>
-      <h3>User Account Maintenance</h3>
-      <a href="LogoutServlet">Logout</a> <br />
-	  <a href="CreateNewAccount.html">Create New Account</a> <br />
- 	  <a href="DeleteAccountServlet">Delete Account</a> <br />
+      <tr><td  colspan = "2"><h3>User Account Maintenance</h3></td></tr>
+      <tr><td colspan = "2"><a class ="buttonStyle2" href="LogoutServlet">Logout</a> </td></tr>
+	  <tr><td colspan = "2"><a class ="buttonStyle2" href="CreateNewAccount.html">Create New Account</a> </td></tr>
+ 	  <tr><td colspan = "2"><a class ="buttonStyle2" href="DeleteAccountServlet">Delete Account</a> </td></tr>
+	  <tr><td colspan = "2"><a class ="buttonStyle2" href="EditAccount.html">Edit Account</a></td></tr>
+	  <tr><td colspan = "2"><div  style="height: 200px;"></div></td></tr>
+</table>
+
 </body>
 </html>
