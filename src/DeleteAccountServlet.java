@@ -45,12 +45,12 @@ public class DeleteAccountServlet extends HttpServlet {
 			account.delete(); 													//Delete the end-user's account data
 			Console.println("Account destroyed");
 			ServletHelper.logout(request);										//Log-out the end-user fm this session
-			ServletHelper.sendResponse(request, response, "Delete account succeded"," Continue", "index.html");
+			ServletHelper.sendResponse(request, response, "Delete account succeeded"," Ok", "index.html");
 		} catch(Exception e) {
 			Console.println("Delete CustomerAccount failed on session="+ServletHelper.getSessionId(request));
 			Console.println(e.getMessage());
 		    //response.sendRedirect("DeleteAccountError.html");  				//Report failure to user
-			ServletHelper.sendResponse(request, response, "Delete account failed: "+e.getMessage(),"Continue", "index.html");
+			ServletHelper.sendResponse(request, response, "Delete account failed: "+e.getMessage(),"Ok", "index.html");
 		}
 	}
 

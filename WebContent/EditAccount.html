@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit User Account</title>
+<!-- This is the preliminary ugly interface for creating a new account.  The user's browser 
+displays this form, and, after clicking submit, transmits a POST message to tomcat
+which will invoke EditAccountServlet to process the user's new account information. -->
+</head>
+   <body>
+      <h1>Create New User Account</h1>
+      <form action="EditAccountServlet" method="POST">
+         New username: <br />
+         <input type="text" name="username1">
+         <br />
+         Repeat: <br />
+         <input type="text" name="username2">
+         <br />
+         New password: <br />
+         <input type="password" name="password1" />
+         <br />
+         Repeat: <br />
+         <input type="password" name="password2" />
+         <br />
+         <input type="submit" value="Submit" />
+      </form>
+   </body>
+</html>

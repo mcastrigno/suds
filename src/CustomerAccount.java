@@ -250,6 +250,22 @@ public class CustomerAccount {
 		//throw(new AccountException("delete not implemented"));
 	} //delete
 	
+	/**
+	 * Updates account name
+	 * @param accountName
+	 */
+	public void updateAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	
+	/**
+	 * Updates account password
+	 * @param password
+	 */
+	public void updatePassword(String password) {
+		this.password = password;
+	}
+	
 	
 	/**
 	 * Retrieves this account's name
